@@ -35,4 +35,9 @@ public class BeerServiceImpl implements BeerService {
 
         return foundBeer;
     }
+
+    @Override
+    public void deleteBeer(UUID beerId) {
+        //delete beer from database
+    }
 }
