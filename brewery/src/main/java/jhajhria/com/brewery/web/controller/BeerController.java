@@ -21,6 +21,8 @@ public class BeerController {
         this.beerService = beerService;
     }
 
+    //sample url
+    //localhost:8080/api/v1/beer/0eee8dc6-7a5c-43eb-a328-7fbb8a1efe8f
     @GetMapping("/{beerId}")
     public ResponseEntity<BeerDto> getBeer(@PathVariable(name = "beerId") UUID beerId) {
 
