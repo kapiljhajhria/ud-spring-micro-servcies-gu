@@ -4,7 +4,7 @@ import com.jhajhria.msscbeerservice.domain.Beer;
 import com.jhajhria.msscbeerservice.web.model.BeerDto;
 import org.mapstruct.Mapper;
 
-@Mapper
+@Mapper(uses = {DateMapper.class})
 public interface BeerMapper {
 
     BeerDto beerToBeerDto(Beer beer);
