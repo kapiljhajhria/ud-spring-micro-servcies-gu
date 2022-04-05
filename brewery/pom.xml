@@ -99,12 +99,12 @@
 						</path>
 
 					</annotationProcessorPaths>
-<!--					probably no longer need to mention compilerArgs from here, can do it using annotations in classes-->
-<!--					<compilerArgs>-->
-<!--						<compilerArg>-->
-<!--							AmapStruct.defaultComponentModel=spring-->
-<!--						</compilerArg>-->
-<!--					</compilerArgs>-->
+					<compilerArgs>
+						<arg>
+							-Amapstruct.defaultComponentModel=spring
+<!--							https://mapstruct.org/documentation/stable/reference/html/-->
+						</arg>
+					</compilerArgs>
 				</configuration>
 			</plugin>
 		</plugins>
