@@ -1,7 +1,6 @@
 package com.jhajhria.jacksonexample;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.springframework.boot.SpringApplication;
@@ -19,9 +18,9 @@ public class JacksonExampleApplication {
 	public ObjectMapper objectMapper() {
 		return JsonMapper.builder()
 				.addModule(new JavaTimeModule())
-				.propertyNamingStrategy(
-						PropertyNamingStrategy.SNAKE_CASE
-				)
+//				.propertyNamingStrategy(
+//						PropertyNamingStrategy.SNAKE_CASE
+//				)
 				.build();
 	}
 
