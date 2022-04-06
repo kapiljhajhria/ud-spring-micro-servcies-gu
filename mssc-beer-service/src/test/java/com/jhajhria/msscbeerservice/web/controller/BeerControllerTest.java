@@ -46,7 +46,7 @@ public class BeerControllerTest {
         mockMvc.perform(delete("/api/v1/beer/{beerId}", UUID.randomUUID())
                         .contentType("application/json"))
                 .andExpect(status().isNoContent())
-                .andDo(document("v1/beer", pathParameters(parameterWithName("beerId").description("UUID of desired beer to delete"))));
+                .andDo(document("v1/beer-delete", pathParameters(parameterWithName("beerId").description("UUID of desired beer to delete"))));
         //check if data is deleted and response data as well if there is any data.
 
     }
@@ -57,7 +57,7 @@ public class BeerControllerTest {
         mockMvc.perform(RestDocumentationRequestBuilders.get("/api/v1/beer/{beerId}", UUID.randomUUID())
                         .accept("application/json"))
                 .andExpect(status().isOk())
-                .andDo(document("v1/beer",
+                .andDo(document("v1/beer-get",
                         pathParameters(
                                 parameterWithName("beerId").description("UUID of desired beer to get")
                         ),
@@ -89,7 +89,7 @@ public class BeerControllerTest {
                         .content(beerDtoJson))
                 .andExpect(status().isCreated())
                 .andDo(
-                        document("v1/beer",
+                        document("v1/beer-new",
                                 requestFields(
                                         fields.withPath("id").ignored(),
                                         fields.withPath("version").ignored(),
