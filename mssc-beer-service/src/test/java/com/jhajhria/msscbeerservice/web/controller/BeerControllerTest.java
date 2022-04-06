@@ -4,8 +4,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jhajhria.msscbeerservice.web.model.BeerDto;
 import com.jhajhria.msscbeerservice.web.model.BeerStyleEnum;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.restdocs.RestDocumentationExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
@@ -14,7 +18,10 @@ import java.util.UUID;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+@AutoConfigureRestDocs
+@ExtendWith({RestDocumentationExtension.class})
 @WebMvcTest(BeerController.class)
+@ComponentScan("com.jhajhria.msscbeerservice.web.mappers")
 public class BeerControllerTest {
 
     @Autowired
@@ -75,4 +82,6 @@ public class BeerControllerTest {
                 .price(new BigDecimal("2.99"))
                 .build();
     }
+
+
 }
