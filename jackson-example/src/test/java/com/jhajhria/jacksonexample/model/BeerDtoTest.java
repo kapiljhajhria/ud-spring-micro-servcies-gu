@@ -14,10 +14,6 @@ class BeerDtoTest extends BaseTest {
     @Autowired
     ObjectMapper objectMapper;
 
-    BeerDtoTest() {
-        objectMapper = new ObjectMapper();
-    }
-
     @Test
     void testSerializeBeerDto() throws JsonProcessingException {
 
