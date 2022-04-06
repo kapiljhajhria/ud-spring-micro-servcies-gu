@@ -1,6 +1,7 @@
 package com.jhajhria.jacksonexample.model;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import java.util.UUID;
 
@@ -15,6 +16,7 @@ public class BaseTest {
                 .lastUpdatedDate(OffsetDateTime.now())
                 .upc(123456789L)
                 .price(new BigDecimal("12.99"))
+                .myLocalDate(LocalDate.now())
                 .build();
 
     }
