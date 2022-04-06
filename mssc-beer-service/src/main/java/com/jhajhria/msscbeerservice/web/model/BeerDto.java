@@ -5,10 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Null;
-import javax.validation.constraints.Positive;
+import javax.validation.constraints.*;
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.util.UUID;
@@ -34,6 +31,7 @@ public class BeerDto {
 
 
     @NotBlank(message = "Beer name is required")
+    @Size(min = 3, max = 100, message = "Beer name must be between 2 and 100 characters")
     private String beerName;
 
     @NotNull
