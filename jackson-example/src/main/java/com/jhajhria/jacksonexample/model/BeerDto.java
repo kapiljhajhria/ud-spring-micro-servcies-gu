@@ -1,5 +1,6 @@
 package com.jhajhria.jacksonexample.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,6 +19,7 @@ import java.util.UUID;
 @Builder
 public class BeerDto {
 
+    @JsonProperty("beerId")
     @Null
     private UUID id;
 
