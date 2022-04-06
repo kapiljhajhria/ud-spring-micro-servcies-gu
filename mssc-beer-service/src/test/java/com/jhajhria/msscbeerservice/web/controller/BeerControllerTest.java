@@ -19,6 +19,8 @@ import java.util.UUID;
 
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.*;
+import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
+import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
 import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
 import static org.springframework.restdocs.request.RequestDocumentation.pathParameters;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -51,7 +53,22 @@ public class BeerControllerTest {
         mockMvc.perform(RestDocumentationRequestBuilders.get("/api/v1/beer/{beerId}",UUID.randomUUID())
                 .accept("application/json"))
                 .andExpect(status().isOk())
-                .andDo(document("v1/beer",pathParameters(parameterWithName("beerId").description("UUID of desired beer to get"))));
+                .andDo(document("v1/beer",
+                        pathParameters(
+                                parameterWithName("beerId").description("UUID of desired beer to get")
+                        ),
+                        responseFields(
+                            fieldWithPath("id").description("UUID of the beer"),
+                            fieldWithPath("beerName").description("Name of the beer"),
+                            fieldWithPath("beerStyle").description("Style of the beer"),
+                            fieldWithPath("upc").description("UPC of the beer"),
+                            fieldWithPath("price").description("Price of the beer"),
+                            fieldWithPath("quantityOnHand").description("Quantity of the beer"),
+                            fieldWithPath("createdDate").description("Date of creation of the beer"),
+                            fieldWithPath("lastModifiedDate").description("Date of last modification of the beer"),
+                            fieldWithPath("version").description("Version Number")
+
+                        )));
         //check data returned as well
 
     }
