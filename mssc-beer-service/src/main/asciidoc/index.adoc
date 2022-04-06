@@ -49,5 +49,20 @@ include::{snippets}/v1/beer-new/response-body.adoc[]
 Request Fields
 include::{snippets}/v1/beer-new/request-fields.adoc[]
 
-Response Fields:
-include::{snippets}
+DELETE BEER
+
+One showing how to make a request using cURL:
+
+include::{snippets}/v1/beer-delete/curl-request.adoc[]
+
+One showing the HTTP request:
+
+include::{snippets}/v1/beer-delete/http-request.adoc[]
+
+And one showing the HTTP response:
+
+include::{snippets}/v1/beer-delete/http-response.adoc[]
+
+Response Body:
+
+include::{snippets}/v1/beer-delete/response-body.adoc[]
