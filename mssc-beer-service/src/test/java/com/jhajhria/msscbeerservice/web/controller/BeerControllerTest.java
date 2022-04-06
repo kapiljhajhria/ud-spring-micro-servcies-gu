@@ -123,7 +123,7 @@ public class BeerControllerTest {
         return BeerDto.builder()
                 .beerName("My Wheat Beer")
                 .beerStyle(BeerStyleEnum.WHEAT)
-                .upc(123456789L)
+                .upc("123456789L")
                 .price(new BigDecimal("2.99"))
                 .build();
     }
