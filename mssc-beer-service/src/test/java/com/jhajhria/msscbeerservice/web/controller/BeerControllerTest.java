@@ -10,19 +10,24 @@ import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDoc
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.restdocs.RestDocumentationExtension;
+import org.springframework.restdocs.constraints.ConstraintDescriptions;
 import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders;
+import org.springframework.restdocs.payload.FieldDescriptor;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.util.StringUtils;
 
 import java.math.BigDecimal;
 import java.util.UUID;
 
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
-import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.*;
+import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.delete;
 import static org.springframework.restdocs.payload.PayloadDocumentation.*;
 import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
 import static org.springframework.restdocs.request.RequestDocumentation.pathParameters;
+import static org.springframework.restdocs.snippet.Attributes.key;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 @AutoConfigureRestDocs
 @ExtendWith({RestDocumentationExtension.class})
 @WebMvcTest(BeerController.class)
@@ -39,9 +44,9 @@ public class BeerControllerTest {
     void testDeleteBeer() throws Exception {
 
         mockMvc.perform(delete("/api/v1/beer/{beerId}", UUID.randomUUID())
-                .contentType("application/json"))
+                        .contentType("application/json"))
                 .andExpect(status().isNoContent())
-                .andDo(document("v1/beer",pathParameters(parameterWithName("beerId").description("UUID of desired beer to delete"))));
+                .andDo(document("v1/beer", pathParameters(parameterWithName("beerId").description("UUID of desired beer to delete"))));
         //check if data is deleted and response data as well if there is any data.
 
     }
@@ -49,23 +54,23 @@ public class BeerControllerTest {
     @Test
     void testGetBeerById() throws Exception {
 
-        mockMvc.perform(RestDocumentationRequestBuilders.get("/api/v1/beer/{beerId}",UUID.randomUUID())
-                .accept("application/json"))
+        mockMvc.perform(RestDocumentationRequestBuilders.get("/api/v1/beer/{beerId}", UUID.randomUUID())
+                        .accept("application/json"))
                 .andExpect(status().isOk())
                 .andDo(document("v1/beer",
                         pathParameters(
                                 parameterWithName("beerId").description("UUID of desired beer to get")
                         ),
                         responseFields(
-                            fieldWithPath("id").description("UUID of the beer"),
-                            fieldWithPath("beerName").description("Name of the beer"),
-                            fieldWithPath("beerStyle").description("Style of the beer"),
-                            fieldWithPath("upc").description("UPC of the beer"),
-                            fieldWithPath("price").description("Price of the beer"),
-                            fieldWithPath("quantityOnHand").description("Quantity of the beer"),
-                            fieldWithPath("createdDate").description("Date of creation of the beer"),
-                            fieldWithPath("lastModifiedDate").description("Date of last modification of the beer"),
-                            fieldWithPath("version").description("Version Number")
+                                fieldWithPath("id").description("UUID of the beer"),
+                                fieldWithPath("beerName").description("Name of the beer"),
+                                fieldWithPath("beerStyle").description("Style of the beer"),
+                                fieldWithPath("upc").description("UPC of the beer"),
+                                fieldWithPath("price").description("Price of the beer"),
+                                fieldWithPath("quantityOnHand").description("Quantity of the beer"),
+                                fieldWithPath("createdDate").description("Date of creation of the beer"),
+                                fieldWithPath("lastModifiedDate").description("Date of last modification of the beer"),
+                                fieldWithPath("version").description("Version Number")
 
                         )));
         //check data returned as well
@@ -77,22 +82,24 @@ public class BeerControllerTest {
         BeerDto beerDto = getValidBeerDto();
         String beerDtoJson = objectMapper.writeValueAsString(beerDto);
 
+        ConstrainedFields fields = new ConstrainedFields(BeerDto.class);
+
         mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/beer/")
-                .contentType("application/json")
-                .content(beerDtoJson))
+                        .contentType("application/json")
+                        .content(beerDtoJson))
                 .andExpect(status().isCreated())
                 .andDo(
                         document("v1/beer",
                                 requestFields(
-                                        fieldWithPath("id").ignored(),
-                                        fieldWithPath("version").ignored(),
-                                        fieldWithPath("createdDate").ignored(),
-                                        fieldWithPath("lastModifiedDate").ignored(),
-                                        fieldWithPath("beerName").description("Name of the beer"),
-                                        fieldWithPath("beerStyle").description("Style of the beer"),
-                                        fieldWithPath("upc").description("UPC of the beer").attributes(),
-                                        fieldWithPath("price").description("Price of the beer"),
-                                        fieldWithPath("quantityOnHand").ignored()
+                                        fields.withPath("id").ignored(),
+                                        fields.withPath("version").ignored(),
+                                        fields.withPath("createdDate").ignored(),
+                                        fields.withPath("lastModifiedDate").ignored(),
+                                        fields.withPath("beerName").description("Name of the beer"),
+                                        fields.withPath("beerStyle").description("Style of the beer"),
+                                        fields.withPath("upc").description("UPC of the beer").attributes(),
+                                        fields.withPath("price").description("Price of the beer"),
+                                        fields.withPath("quantityOnHand").ignored()
                                 )
                         )
 
@@ -105,14 +112,14 @@ public class BeerControllerTest {
         BeerDto beerDto = getValidBeerDto();
         String beerDtoJson = objectMapper.writeValueAsString(beerDto);
 
-        mockMvc.perform(MockMvcRequestBuilders.put("/api/v1/beer/"+ UUID.randomUUID())
-                .contentType("application/json")
-                .content(beerDtoJson))
+        mockMvc.perform(MockMvcRequestBuilders.put("/api/v1/beer/" + UUID.randomUUID())
+                        .contentType("application/json")
+                        .content(beerDtoJson))
                 .andExpect(status().isOk());
         //check return data as well
     }
 
-    BeerDto getValidBeerDto(){
+    BeerDto getValidBeerDto() {
         return BeerDto.builder()
                 .beerName("My Wheat Beer")
                 .beerStyle(BeerStyleEnum.WHEAT)
@@ -122,4 +129,18 @@ public class BeerControllerTest {
     }
 
 
+    private static class ConstrainedFields {
+
+        private final ConstraintDescriptions constraintDescriptions;
+
+        ConstrainedFields(Class<?> input) {
+            this.constraintDescriptions = new ConstraintDescriptions(input);
+        }
+
+        private FieldDescriptor withPath(String path) {
+            return fieldWithPath(path).attributes(key("constraints").value(StringUtils
+                    .collectionToDelimitedString(this.constraintDescriptions
+                            .descriptionsForProperty(path), ". ")));
+        }
+    }
 }
