@@ -35,6 +35,8 @@ public class BeerDto {
 
     @JsonFormat(shape = JsonFormat.Shape.STRING)
     private BigDecimal price;
+
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ssZ")
     private OffsetDateTime createdDate;
     private OffsetDateTime lastUpdatedDate;
 }
