@@ -19,8 +19,7 @@ import java.util.UUID;
 
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.*;
-import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
-import static org.springframework.restdocs.request.RequestDocumentation.pathParameters;
+import static org.springframework.restdocs.request.RequestDocumentation.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 @AutoConfigureRestDocs
 @ExtendWith({RestDocumentationExtension.class})
@@ -49,9 +48,10 @@ public class BeerControllerTest {
     void testGetBeerById() throws Exception {
 
         mockMvc.perform(RestDocumentationRequestBuilders.get("/api/v1/beer/{beerId}",UUID.randomUUID())
+                .param("beerId",UUID.randomUUID().toString())
                 .accept("application/json"))
                 .andExpect(status().isOk())
-                .andDo(document("v1/beer",pathParameters(parameterWithName("beerId").description("UUID of desired beer to get"))));
+                .andDo(document("v1/beer",pathParameters(parameterWithName("beerId").description("UUID of desired beer to get")),requestParameters(parameterWithName("beerId").description("UUID of desired beer to get"))));
         //check data returned as well
 
     }
