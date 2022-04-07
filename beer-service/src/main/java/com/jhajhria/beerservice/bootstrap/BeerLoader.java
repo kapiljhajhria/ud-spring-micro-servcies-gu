@@ -3,14 +3,13 @@ package com.jhajhria.beerservice.bootstrap;
 
 import com.jhajhria.beerservice.repositories.BeerRepository;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.stereotype.Component;
 
 import java.util.UUID;
 
 /**
  * Created by jt on 2019-05-17.
  */
-@Component
+//@Component
 public class BeerLoader implements CommandLineRunner {
 
     public static final String BEER_1_UPC = "0631234200036";
