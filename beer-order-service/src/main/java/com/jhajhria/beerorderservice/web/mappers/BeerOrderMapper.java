@@ -21,10 +21,12 @@ package com.jhajhria.beerorderservice.web.mappers;
 import com.jhajhria.beerorderservice.domain.BeerOrder;
 import com.jhajhria.beerorderservice.web.model.BeerOrderDto;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 @Mapper(uses = {DateMapper.class, BeerOrderLineMapper.class},componentModel = "spring")
 public interface BeerOrderMapper {
 
+    @Mapping(target = "customerId", source = "customer.id")
     BeerOrderDto beerOrderToDto(BeerOrder beerOrder);
 
     BeerOrder dtoToBeerOrder(BeerOrderDto dto);
