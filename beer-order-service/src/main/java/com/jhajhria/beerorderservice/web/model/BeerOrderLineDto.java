@@ -37,8 +37,10 @@ public class BeerOrderLineDto extends BaseItem {
         super(id, version, createdDate, lastModifiedDate);
         this.upc = upc;
         this.beerName = beerName;
+//        this.beerStyle = beerStyle; // restore this if you get error at this stage
         this.beerId = beerId;
         this.orderQuantity = orderQuantity;
+//        this.price = price; // restore this if you get error at this stage
     }
 
     private String upc;
