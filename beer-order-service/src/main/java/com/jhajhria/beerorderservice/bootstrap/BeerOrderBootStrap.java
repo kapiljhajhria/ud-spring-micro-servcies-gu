@@ -4,7 +4,6 @@ import com.jhajhria.beerorderservice.domain.Customer;
 import com.jhajhria.beerorderservice.repositories.CustomerRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -19,8 +18,7 @@ public class BeerOrderBootStrap implements CommandLineRunner {
     public static final String BEER_2_UPC = "0631234300019";
     public static final String BEER_3_UPC = "0083783375213";
 
-    @Autowired
-    CustomerRepository customerRepository;
+    private final CustomerRepository customerRepository;
 
     @Override
     public void run(String... args) throws Exception {
@@ -34,7 +32,7 @@ public class BeerOrderBootStrap implements CommandLineRunner {
                     .apiKey(UUID.randomUUID())
                     .build());
 
-            log.info("Tasting Room Customer Id: " + savedCustomer.getId().toString());
+            log.debug("Tasting Room Customer Id: " + savedCustomer.getId().toString());
         }
     }
 }
