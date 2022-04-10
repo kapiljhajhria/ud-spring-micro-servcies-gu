@@ -27,7 +27,6 @@ import com.jhajhria.beerorderservice.web.mappers.BeerOrderMapper;
 import com.jhajhria.beerorderservice.web.model.BeerOrderDto;
 import com.jhajhria.beerorderservice.web.model.BeerOrderPagedList;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -43,18 +42,19 @@ import java.util.stream.Collectors;
 @Service
 public class BeerOrderServiceImpl implements BeerOrderService {
 
-    @Autowired
-      BeerOrderRepository beerOrderRepository;
+    private final BeerOrderRepository beerOrderRepository;
+    private final CustomerRepository customerRepository;
+    private final BeerOrderMapper beerOrderMapper;
+    private final ApplicationEventPublisher publisher;
 
-    @Autowired
-    CustomerRepository customerRepository;
-
-    @Autowired
-     BeerOrderMapper beerOrderMapper;
-
-    @Autowired
-    ApplicationEventPublisher publisher;
-
+    public BeerOrderServiceImpl(BeerOrderRepository beerOrderRepository,
+                                CustomerRepository customerRepository,
+                                BeerOrderMapper beerOrderMapper, ApplicationEventPublisher publisher) {
+        this.beerOrderRepository = beerOrderRepository;
+        this.customerRepository = customerRepository;
+        this.beerOrderMapper = beerOrderMapper;
+        this.publisher = publisher;
+    }
 
     @Override
     public BeerOrderPagedList listOrders(UUID customerId, Pageable pageable) {
