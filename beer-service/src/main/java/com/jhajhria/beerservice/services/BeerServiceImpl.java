@@ -7,7 +7,8 @@ import com.jhajhria.beerservice.web.mappers.BeerMapper;
 import com.jhajhria.beerservice.web.model.BeerDto;
 import com.jhajhria.beerservice.web.model.BeerPagedList;
 import com.jhajhria.beerservice.web.model.BeerStyleEnum;
-import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -20,14 +21,19 @@ import java.util.stream.Collectors;
 /**
  * Created by jt on 2019-06-06.
  */
-@RequiredArgsConstructor
+@Slf4j
 @Service
 public class BeerServiceImpl implements BeerService {
-    private final BeerRepository beerRepository;
-    private final BeerMapper beerMapper;
+    @Autowired
+    BeerRepository beerRepository;
 
+    @Autowired
+    BeerMapper beerMapper;
+
+    @Cacheable(value = "beerCache", key = "#beerId", condition = "#showInventoryOnHand.equals(false)")
     @Override
     public BeerDto getById(UUID beerId, Boolean showInventoryOnHand) {
+        log.info("Not using cache - getById called - beerId: " + beerId);
         if (showInventoryOnHand) {
             return beerMapper.beerToBeerDtoWithInventory(
                     beerRepository.findById(beerId).orElseThrow(NotFoundException::new)
@@ -56,10 +62,10 @@ public class BeerServiceImpl implements BeerService {
         return beerMapper.beerToBeerDto(beerRepository.save(beer));
     }
 
-    @Cacheable(cacheNames = "beerListCache", condition = "#showInventoryOnHand == false ")
+    @Cacheable(value = "beerPagedList", condition ="#showInventoryOnHand==false" )
     @Override
     public BeerPagedList listBeers(String beerName, BeerStyleEnum beerStyle, PageRequest pageRequest, Boolean showInventoryOnHand) {
-
+    log.info("getting all beers - THis mean cache wasn't used");
         BeerPagedList beerPagedList;
         Page<Beer> beerPage;
 
