@@ -202,20 +202,20 @@
                         </goals>
                         <configuration>
                             <rules>
-                                <rule>
-                                    <requiredMavenVersion>
-                                        <version>[3.8.4,)</version>
+<!--                                <rule>-->
+                                    <requireMavenVersion>
+                                        <version>[3.8.0,)</version>
 <!--                                        check more version syntax at https://maven.apache.org/pom.html#Dependency_Version_Requirement_Specification-->
-                                    </requiredMavenVersion>
-                                    <requiredJavaVersion>
-                                        <version>[17.0.0,)</version>
-                                    </requiredJavaVersion>
-                                    <requiredReleaseDeps>
+                                    </requireMavenVersion>
+                                    <requireJavaVersion>
+                                        <version>[17,)</version>
+                                    </requireJavaVersion>
+                                    <requireReleaseDeps>
 <!--                                        https://maven.apache.org/enforcer/enforcer-rules/requireReleaseDeps.html-->
                                         <onlyWhenRelease>true</onlyWhenRelease>
                                         <message>Release build must not have on snapshot dependencies</message>
-                                    </requiredReleaseDeps>
-                                </rule>
+                                    </requireReleaseDeps>
+<!--                                </rule>-->
                             </rules>
                         </configuration>
                     </execution>
