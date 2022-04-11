@@ -44,7 +44,15 @@
     <maven.compiler.source>${java.version}</maven.compiler.source>
     <maven.compiler.target>${java.version}</maven.compiler.target>
 <!--        only java version from spring project, other from old springboot or from course repo-->
+<!--        pick common properties from other services and paste below-->
+        <org.mapstruct.version>1.4.2.Final</org.mapstruct.version>
+        <lombok-mapstruct-binding.version>0.2.0</lombok-mapstruct-binding.version>
+        <hibernate.version>5.6.5.Final</hibernate.version>
     </properties>
+
+    <dependencyManagement>
+
+    </dependencyManagement>
 
 
 
