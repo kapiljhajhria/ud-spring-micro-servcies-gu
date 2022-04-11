@@ -16,5 +16,27 @@
     <version>1.0-SNAPSHOT</version>
 
     <packaging>pom</packaging>
+<!--    https://maven.apache.org/pom.html  check docs for more info-->
+    <licenses>
+        <license>
+            <name>Apache 2</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <organization>
+        <name>Jhajhria</name>
+        <url>https://jhajhria.com</url>
+    </organization>
+
+    <developers>
+            <developer>
+                <name>Jhajhria</name>
+                <organization>jhajhria</organization>
+            </developer>
+    </developers>
+
+
 
 </project>
