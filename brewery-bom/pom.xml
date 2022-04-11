@@ -190,6 +190,37 @@
                     </compilerArgs>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-enforcer-plugin</artifactId>
+<!--                https://maven.apache.org/enforcer/maven-enforcer-plugin/usage.html-->
+                <executions>
+                    <execution>
+                        <id>enforce-versions</id>
+                        <goals>
+                            <goal>enforce</goal>
+                        </goals>
+                        <configuration>
+                            <rules>
+                                <rule>
+                                    <requiredMavenVersion>
+                                        <version>[3.8.4,)</version>
+<!--                                        check more version syntax at https://maven.apache.org/pom.html#Dependency_Version_Requirement_Specification-->
+                                    </requiredMavenVersion>
+                                    <requiredJavaVersion>
+                                        <version>[17.0.0,)</version>
+                                    </requiredJavaVersion>
+                                    <requiredReleaseDeps>
+<!--                                        https://maven.apache.org/enforcer/enforcer-rules/requireReleaseDeps.html-->
+                                        <onlyWhenRelease>true</onlyWhenRelease>
+                                        <message>Release build must not have on snapshot dependencies</message>
+                                    </requiredReleaseDeps>
+                                </rule>
+                            </rules>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
 
