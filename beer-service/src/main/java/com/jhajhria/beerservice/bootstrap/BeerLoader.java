@@ -4,11 +4,12 @@ package com.jhajhria.beerservice.bootstrap;
 import com.jhajhria.beerservice.domain.Beer;
 import com.jhajhria.beerservice.repositories.BeerRepository;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.stereotype.Component;
 
 /**
  * Created by jt on 2019-05-17.
  */
-//@Component
+@Component
 public class BeerLoader implements CommandLineRunner {
 
     public static final String BEER_1_UPC = "0631234200036";
@@ -26,7 +27,7 @@ public class BeerLoader implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        //using data.sql file now
+        //switched to using the loadBeerObjects method after we started using mysql db
          if (beerRepository.count() == 0) {
              loadBeerObjects();
          }
