@@ -26,6 +26,7 @@ public class BeerOrderBootStrap implements CommandLineRunner {
     }
 
     private void loadCustomerData() {
+
         if (customerRepository.count() == 0) {
             Customer savedCustomer = customerRepository.save(Customer.builder()
                     .customerName(TASTING_ROOM)
@@ -34,5 +35,6 @@ public class BeerOrderBootStrap implements CommandLineRunner {
 
             log.info("Tasting Room Customer Id: " + savedCustomer.getId().toString());
         }
+        log.info("Customers Loaded: " + customerRepository.count());
     }
 }

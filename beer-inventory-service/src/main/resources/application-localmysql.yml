@@ -1,0 +1,9 @@
+spring:
+  datasource:
+    username: beer_order_service
+    password: password
+    url: jdbc:mysql://localhost:3307/beerorderservice?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC
+  jpa:
+    database: mysql
+    hibernate:
+      ddl-auto: update
