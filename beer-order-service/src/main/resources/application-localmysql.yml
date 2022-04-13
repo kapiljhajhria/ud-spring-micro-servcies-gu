@@ -3,7 +3,28 @@ spring:
     username: beer_inventory_service
     password: password
     url: jdbc:mysql://localhost:3307/beerinventoryservice?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC
+    hikari:
+      maximum-pool-size: 5
+      data-source-properties:
+        cachePrepStmts: true
+        prepStmtCacheSize: 250
+        prepStmtCacheSqlLimit: 2048
+        useServerPrepStmts: true
+        useLocalSessionState: true
+        rewriteBatchedStatements: true
+        cacheResultSetMetadata: true
+        cacheServerConfiguration: true
+        elideSetAutoCommits: true
+        maintainTimeStats: false
+
   jpa:
     database: mysql
     hibernate:
       ddl-auto: update
+
+# Enable logging for config troubleshooting
+logging:
+  level:
+    org.hibernate.SQL: DEBUG
+    com.zaxxer.hikari.HikariConfig: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
