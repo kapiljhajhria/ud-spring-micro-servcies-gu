@@ -11,3 +11,8 @@ spring:
 jhajhria:
   brewery.:
     beer-inventory-service-host: http://localhost:8082
+
+  spring:
+    artemis:
+      user: artemis
+      password: simetraehcapa

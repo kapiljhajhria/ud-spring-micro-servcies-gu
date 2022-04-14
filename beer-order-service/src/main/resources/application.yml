@@ -6,3 +6,8 @@ server:
 jhajhria:
   brewery:
     beerServiceHost: http://localhost:8080
+
+spring:
+  artemis:
+    user: artemis
+    password: simetraehcapa
