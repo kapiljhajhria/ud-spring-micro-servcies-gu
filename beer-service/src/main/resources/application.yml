@@ -16,3 +16,8 @@ jhajhria:
     artemis:
       user: artemis
       password: simetraehcapa
+
+logging:
+  level:
+    com:
+      jhajhria: debug
