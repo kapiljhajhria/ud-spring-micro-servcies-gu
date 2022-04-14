@@ -1,4 +1,4 @@
-package com.jhajhria.beerservice.services;
+package com.jhajhria.beerservice.services.brewing;
 
 import com.jhajhria.beerservice.config.JmsConfig;
 import com.jhajhria.beerservice.domain.Beer;
