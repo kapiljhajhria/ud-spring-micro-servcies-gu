@@ -1,4 +1,4 @@
-package com.jhajhria.beerservice.events;
+package com.jhajhria.common.events;
 
 import com.jhajhria.beerservice.web.model.BeerDto;
 import lombok.*;

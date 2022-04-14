@@ -2,8 +2,8 @@ package com.jhajhria.beerservice.services.brewing;
 
 import com.jhajhria.beerservice.config.JmsConfig;
 import com.jhajhria.beerservice.domain.Beer;
-import com.jhajhria.beerservice.events.BrewBeerEvent;
-import com.jhajhria.beerservice.events.NewInventoryEvent;
+import com.jhajhria.common.events.BrewBeerEvent;
+import com.jhajhria.common.events.NewInventoryEvent;
 import com.jhajhria.beerservice.repositories.BeerRepository;
 import com.jhajhria.beerservice.web.model.BeerDto;
 import lombok.RequiredArgsConstructor;
