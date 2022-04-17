@@ -24,8 +24,8 @@ spring:
       ddl-auto: update
 
 # Enable logging for config troubleshooting
-logging:
-  level:
-    org.hibernate.SQL: DEBUG
-    com.zaxxer.hikari.HikariConfig: DEBUG
-    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+#logging:
+#  level:
+#    org.hibernate.SQL: DEBUG
+#    com.zaxxer.hikari.HikariConfig: DEBUG
+#    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
