@@ -1,6 +1,3 @@
-logging:
-  level:
-    gurg: debug
 server:
   port: 8082
 
@@ -8,3 +5,9 @@ spring:
   artemis:
     user: artemis
     password: simetraehcapa
+    mode: native
+
+logging:
+  level:
+    com:
+      jhajhria: debug
