@@ -1,8 +1,8 @@
 spring:
   datasource:
-    username: beer_inventory_service
+    username: beer_order_service
     password: password
-    url: jdbc:mysql://localhost:3307/beerinventoryservice?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC
+    url: jdbc:mysql://localhost:3307/beerorderservice?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC
     hikari:
       maximum-pool-size: 5
       data-source-properties:
